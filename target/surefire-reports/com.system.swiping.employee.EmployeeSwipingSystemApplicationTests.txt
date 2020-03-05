@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.system.swiping.employee.EmployeeSwipingSystemApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.096 s <<< FAILURE! - in com.system.swiping.employee.EmployeeSwipingSystemApplicationTests
+initializationError(com.system.swiping.employee.EmployeeSwipingSystemApplicationTests)  Time elapsed: 0.025 s  <<< ERROR!
+java.lang.Exception: The class com.system.swiping.employee.EmployeeSwipingSystemApplicationTests is not public.
+
+initializationError(com.system.swiping.employee.EmployeeSwipingSystemApplicationTests)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Test class should have exactly one public constructor
+
+initializationError(com.system.swiping.employee.EmployeeSwipingSystemApplicationTests)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Method contextLoads() should be public
+
