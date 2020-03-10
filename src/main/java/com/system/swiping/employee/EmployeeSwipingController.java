@@ -23,43 +23,35 @@ public class EmployeeSwipingController {
 
 	@Autowired
 	private EmployeeSwipingTrackDAO dao;
-	private static SimpleDateFormat dateTime=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); 
 	
+	private static SimpleDateFormat dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
 	@RequestMapping(value = "/saveEmpTimeInfo", method = RequestMethod.POST)
 	public String save(@RequestBody EmpSwipeRequest request) {
-		
-		Employee emp = new Employee();
-		emp.setEmpId(request.getEmpId());
-		emp.setCurrDate(new Date());
-		emp.setEmpName(request.getEmpName());
-		
+
 		EmployeeTimeTracking timeTracking = new EmployeeTimeTracking();
-		
+
 		try {
-			if(request.getSwipingType().equalsIgnoreCase("IN")) {
+			if (request.getSwipingType().equalsIgnoreCase("IN")) {
 				timeTracking.setSwipeIn(dateTime.parse(request.getSwipeIn()));
-			} else if(request.getSwipingType().equalsIgnoreCase("OUT")) {
+			} else if (request.getSwipingType().equalsIgnoreCase("OUT")) {
 				timeTracking.setSwipeOut(dateTime.parse(request.getSwipeOut()));
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		timeTracking.setEmpId(request.getEmpId());
 		timeTracking.setLocationName(request.getLocationName());
-		
-		dao.saveEmployee(emp, timeTracking);
+
+		dao.saveEmployee(request, timeTracking);
 		return "Date Saved Successfully...";
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/getEmpTimeInfo", method = RequestMethod.GET)
 	public EmpSwipeResponse viewHomePage(@RequestBody EmpSwipeRequest request) {
 		EmpSwipeResponse response = dao.getEmpTimeTrackingInfo(request);
 		return response;
 	}
 
-
-	
 }

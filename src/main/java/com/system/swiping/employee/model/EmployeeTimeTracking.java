@@ -3,15 +3,16 @@ package com.system.swiping.employee.model;
 import java.util.Date;
 
 public class EmployeeTimeTracking {
-	
+
 	private int trackingID;
 	private Date swipeIn;
 	private Date swipeOut;
 	private String locationName;
 	private int empId;
-	
-	public EmployeeTimeTracking() {}
-	
+
+	public EmployeeTimeTracking() {
+	}
+
 	public EmployeeTimeTracking(int trackingID, Date swipeIn, Date swipeOut, String locationName, int empId) {
 		super();
 		this.trackingID = trackingID;
@@ -66,5 +67,5 @@ public class EmployeeTimeTracking {
 		return "EmployeeTimeTracking [trackingID=" + trackingID + ", swipeIn=" + swipeIn + ", swipeOut=" + swipeOut
 				+ ", locationName=" + locationName + ", empId=" + empId + "]";
 	}
-	
+
 }
