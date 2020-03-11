@@ -11,6 +11,7 @@ public class EmpSwipeRequest {
 	private String date;
 	private String locationName;
 	private String swipingType;
+	private Date currDate;
 
 	public Integer getEmpId() {
 		return empId;
@@ -66,6 +67,14 @@ public class EmpSwipeRequest {
 
 	public void setSwipingType(String swipingType) {
 		this.swipingType = swipingType;
+	}
+
+	public Date getCurrDate() {
+		return currDate;
+	}
+
+	public void setCurrDate(Date currDate) {
+		this.currDate = currDate;
 	}
 
 }
