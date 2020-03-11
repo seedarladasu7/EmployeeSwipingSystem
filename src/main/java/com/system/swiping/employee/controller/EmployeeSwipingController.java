@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.system.swiping.employee.dao.EmployeeSwipingTrackDAO;
 import com.system.swiping.employee.model.EmpSwipeRequest;
 import com.system.swiping.employee.model.EmpSwipeResponse;
+import com.system.swiping.employee.model.EmployeeEntity;
 import com.system.swiping.employee.model.EmployeeTimeTracking;
 import com.system.swiping.employee.service.EmployeeSwipingTrackEntityService;
 
@@ -52,8 +53,14 @@ public class EmployeeSwipingController {
 	}
 
 	@RequestMapping(value = "/getEmpTimeInfo", method = RequestMethod.GET)
-	public EmpSwipeResponse viewHomePage(@RequestBody EmpSwipeRequest request) {
+	public EmpSwipeResponse getEmpTimeInfo(@RequestBody EmpSwipeRequest request) {
 		EmpSwipeResponse response = dao.getEmpTimeTrackingInfo(request);
+		return response;
+	}
+	
+	@RequestMapping(value = "/getEmpTimeTrackingInfo", method = RequestMethod.GET)
+	public EmployeeEntity getEmpTimeTrackingInfo(@RequestBody EmpSwipeRequest request) throws Exception {
+		EmployeeEntity response = service.getEmployeeById(request.getEmpId());
 		return response;
 	}
 

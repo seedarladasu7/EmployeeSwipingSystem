@@ -1,21 +1,17 @@
-CREATE TABLE EmployeeTimeTracking (
-    TrackingID int NOT NULL AUTO INCREMENT,
-    SwipeIn DATETIME,
-    SwipeOut DATETIME,
-	LocationName varchar(255),
-	SwipingType varchar(10),
-    EmpID int NOT NULL,
-	PRIMARY KEY (TrackingID),
-    FOREIGN KEY (EmpID) REFERENCES Employee(EmpID)
+CREATE TABLE employee (
+    id int NOT AUTO INCREMENT,
+    empname varchar(255),
+    currdate DATE,
+    PRIMARY KEY (id)
 );
 
-
-
-CREATE TABLE Employee (
-    EmpID int NOT AUTO INCREMENT,
-    EmpName varchar(255),
-    CurrDate DATE,
-    PRIMARY KEY (EmpID)
+CREATE TABLE employeetimetracking (
+    id int NOT NULL AUTO INCREMENT,
+    swipein DATETIME,
+    swipeout DATETIME,
+	locationname varchar(255),
+	swipingtype varchar(10),
+    empid int NOT NULL,
+	PRIMARY KEY (id),
+    FOREIGN KEY (empid) REFERENCES employee(id)
 );
-
-

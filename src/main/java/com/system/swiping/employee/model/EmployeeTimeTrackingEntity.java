@@ -15,21 +15,22 @@ public class EmployeeTimeTrackingEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Integer trackingID;
 	
-	@Column
+	@Column(name = "swipenn")
 	private Date swipeIn;
 	
-	@Column
+	@Column(name = "swipeout")
 	private Date swipeOut;
 	
-	@Column
+	@Column(name = "locationname")
 	private String locationName;
 	
-	@Column
+	@Column(name = "swipingtype")
 	private String swipingType;
 	
-	@Column
+	@Column(name = "empid")
 	private int empId;
 
 	public EmployeeTimeTrackingEntity() {

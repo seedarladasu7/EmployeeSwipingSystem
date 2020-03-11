@@ -1,6 +1,7 @@
 package com.system.swiping.employee.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,8 +14,9 @@ import com.system.swiping.employee.model.EmployeeEntity;
 @Repository
 public interface EmployeeRepository extends CrudRepository<EmployeeEntity, Integer>{
 	
+	Optional<EmployeeEntity> findById(Integer empId);
 	List<EmployeeEntity> findByEmpName(String empName);
-    List<EmployeeEntity> findByEmpIdAndEmpName(int empId, String empName);
+    List<EmployeeEntity> findByEmpIdAndEmpName(Integer empId, String empName);
 
 	/*
 	 * @Query("SELECT a FROM EmployeeEntity a WHERE a.title=:title and a.category=:category"

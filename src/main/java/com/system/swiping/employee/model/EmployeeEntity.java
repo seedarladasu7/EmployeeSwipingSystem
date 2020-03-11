@@ -1,6 +1,6 @@
 package com.system.swiping.employee.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,17 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="EMPLOYEE")
+@Table(name="employee")
 public class EmployeeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Integer empId;
 	
-	@Column
+	@Column(name = "empname")
 	private String empName;
 	
-	@Column
+	@Column(name = "currdate")
 	private Date currDate;
 
 	public EmployeeEntity() {

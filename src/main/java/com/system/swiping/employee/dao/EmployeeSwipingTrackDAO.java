@@ -39,7 +39,7 @@ public class EmployeeSwipingTrackDAO {
 		BigInteger employeeId = null ;
 		if (emp1 == null || emp1.isEmpty()) {
 			SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-			insertActor.withTableName("Employee").usingGeneratedKeyColumns("empId").usingColumns("empName", "currDate");
+			insertActor.withTableName("employee").usingGeneratedKeyColumns("id").usingColumns("empname", "currdate");
 			BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(empRequest);
 			employeeId = (BigInteger) insertActor.executeAndReturnKey(param);
 		} 
@@ -52,9 +52,9 @@ public class EmployeeSwipingTrackDAO {
 		 */
 
 		SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-		insertActor.withTableName("EmployeeTimeTracking")
-					.usingGeneratedKeyColumns("trackingID")
-					.usingColumns("swipeIn", "swipeOut", "locationName", "swipingType", "empID");
+		insertActor.withTableName("employeetimetracking")
+					.usingGeneratedKeyColumns("id")
+					.usingColumns("swipein", "swipeout", "locationname", "swipingtype", "empid");
 		BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(timeTracking);
 		insertActor.executeAndReturnKey(param);
 	}
@@ -75,16 +75,16 @@ public class EmployeeSwipingTrackDAO {
 
 	public List<Employee> findEmployeeById(int empId) {
 		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
-		return template.query("select empId, empName, currDate  from EMPLOYEE where empId = :EmpId",
+		return template.query("select id, empname, currdate  from EMPLOYEE where id = :EmpId",
 				new MapSqlParameterSource("EmpId", empId), new EmployeeMapper());
 	}
 
 	private static final class EmployeeMapper implements RowMapper<Employee> {
 		public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Employee emp = new Employee();
-			emp.setEmpId(rs.getInt("empId"));
-			emp.setEmpName(rs.getString("empName"));
-			emp.setCurrDate(rs.getDate("currDate"));
+			emp.setEmpId(rs.getInt("id"));
+			emp.setEmpName(rs.getString("empname"));
+			emp.setCurrDate(rs.getDate("currdate"));
 			return emp;
 		}
 	}
@@ -107,7 +107,7 @@ public class EmployeeSwipingTrackDAO {
 					.addValue("empId", empRequestd.getEmpId())
 					.addValue("empName", empRequestd.getEmpName())
 					.addValue("currDate", formatter.format(myDate));
-			template.update("INSERT INTO EMPLOYEE (  empId, empName, currDate) VALUES (:empId, :empName, :currDate)", parameters,
+			template.update("INSERT INTO EMPLOYEE (  id, empname, currdate) VALUES (:empId, :empName, :currDate)", parameters,
 					holder);
 			System.out.println(" row inserted.");
 		} catch (Exception e) {
