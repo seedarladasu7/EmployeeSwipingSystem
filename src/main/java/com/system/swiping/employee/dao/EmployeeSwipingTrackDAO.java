@@ -53,7 +53,7 @@ public class EmployeeSwipingTrackDAO {
 
 		SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
 		insertActor.withTableName("EmployeeTimeTracking").usingColumns("trackingID", "swipeIn", "swipeOut",
-				"locationName", "empID");
+				"locationName", "swipingType", "empID");
 		BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(timeTracking);
 		insertActor.execute(param);
 	}
@@ -108,7 +108,7 @@ public class EmployeeSwipingTrackDAO {
 					.addValue("empId", empRequestd.getEmpId())
 					.addValue("empName", empRequestd.getEmpName())
 					.addValue("currDate", formatter.format(myDate));
-			template.update("INSERT INTO EMPLOYEE (  empId, empName, currDate) VALUES (:empId, :empName,:currDate)", parameters,
+			template.update("INSERT INTO EMPLOYEE (  empId, empName, currDate) VALUES (:empId, :empName, :currDate)", parameters,
 					holder);
 			System.out.println(" row inserted.");
 		} catch (ParseException e) {
@@ -117,14 +117,4 @@ public class EmployeeSwipingTrackDAO {
 		}
 
 	}
-	
-	
-	
-		 protected String getDateToDBFormat(Date fechaCreacion){
-		        return  "TO_TIMESTAMP('" + 
-		                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fechaCreacion)
-		                    + "', 'yyyy-mm-dd hh24:mi:ss')" ;
-		        }
-	
-
 }

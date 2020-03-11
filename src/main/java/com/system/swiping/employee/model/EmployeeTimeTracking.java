@@ -8,17 +8,19 @@ public class EmployeeTimeTracking {
 	private Date swipeIn;
 	private Date swipeOut;
 	private String locationName;
+	private String swipingType;
 	private int empId;
 
 	public EmployeeTimeTracking() {
 	}
 
-	public EmployeeTimeTracking(int trackingID, Date swipeIn, Date swipeOut, String locationName, int empId) {
+	public EmployeeTimeTracking(int trackingID, Date swipeIn, Date swipeOut, String locationName, String swipingType, int empId) {
 		super();
 		this.trackingID = trackingID;
 		this.swipeIn = swipeIn;
 		this.swipeOut = swipeOut;
 		this.locationName = locationName;
+		this.swipingType = swipingType;
 		this.empId = empId;
 	}
 
@@ -53,6 +55,14 @@ public class EmployeeTimeTracking {
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
+	
+	public String getSwipingType() {
+		return swipingType;
+	}
+
+	public void setSwipingType(String swipingType) {
+		this.swipingType = swipingType;
+	}
 
 	public int getEmpId() {
 		return empId;
@@ -65,7 +75,7 @@ public class EmployeeTimeTracking {
 	@Override
 	public String toString() {
 		return "EmployeeTimeTracking [trackingID=" + trackingID + ", swipeIn=" + swipeIn + ", swipeOut=" + swipeOut
-				+ ", locationName=" + locationName + ", empId=" + empId + "]";
+				+ ", locationName=" + locationName + ", swipingType=" + swipingType + ", empId=" + empId + "]";
 	}
 
 }
