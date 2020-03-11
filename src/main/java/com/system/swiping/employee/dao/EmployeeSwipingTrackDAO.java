@@ -85,7 +85,6 @@ public class EmployeeSwipingTrackDAO {
 			emp.setEmpId(rs.getInt("empId"));
 			emp.setEmpName(rs.getString("empName"));
 			emp.setCurrDate(rs.getDate("currDate"));
-			;
 			return emp;
 		}
 	}
