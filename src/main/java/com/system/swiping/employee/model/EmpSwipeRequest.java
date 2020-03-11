@@ -12,6 +12,7 @@ public class EmpSwipeRequest {
 	private String locationName;
 	private String swipingType;
 	private Date currDate;
+	private String searchBy;
 
 	public Integer getEmpId() {
 		return empId;
@@ -77,4 +78,13 @@ public class EmpSwipeRequest {
 		this.currDate = currDate;
 	}
 
+	public String getSearchBy() {
+		return searchBy;
+	}
+
+	public void setSearchBy(String searchBy) {
+		this.searchBy = searchBy;
+	}
+
+	
 }

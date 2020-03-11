@@ -60,7 +60,15 @@ public class EmployeeSwipingController {
 	
 	@RequestMapping(value = "/getEmpTimeTrackingInfo", method = RequestMethod.GET)
 	public EmployeeEntity getEmpTimeTrackingInfo(@RequestBody EmpSwipeRequest request) throws Exception {
-		EmployeeEntity response = service.getEmployeeById(request.getEmpId());
+		EmployeeEntity response = null;
+		
+		if (request.getSearchBy().equalsIgnoreCase("ID")) {
+			response = service.getEmployeeById(request.getEmpId());
+		} else if (request.getSearchBy().equalsIgnoreCase("NAME")) {
+			response = service.getEmployeeByName(request.getEmpName());
+		}
+		
+		
 		return response;
 	}
 

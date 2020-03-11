@@ -1,5 +1,6 @@
 package com.system.swiping.employee.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,19 @@ public class EmployeeSwipingTrackEntityService {
 	EmployeeRepository empRepo;
 	
 	public EmployeeEntity getEmployeeById(int empId) throws Exception {
-		//Optional<EmployeeEntity> entityOpt = 
-		
 		return empRepo.findById(new Integer(empId)).orElseThrow(Exception::new);
 	}
+	
+	
+	public EmployeeEntity getEmployeeByName(String name) throws Exception {
+		
+		List<EmployeeEntity> empList = empRepo.findByEmpName(name); 
+		if(empList != null && !empList.isEmpty()) 
+			return empList.get(0);
+		return null;
+		
+	}
+	
 	
 	
 

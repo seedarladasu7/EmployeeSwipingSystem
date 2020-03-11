@@ -1,12 +1,12 @@
 CREATE TABLE employee (
-    id int NOT AUTO INCREMENT,
+    id int NOT AUTO_INCREMENT,
     empname varchar(255),
     currdate DATE,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE employeetimetracking (
-    id int NOT NULL AUTO INCREMENT,
+    id int NOT NULL AUTO_INCREMENT,
     swipein DATETIME,
     swipeout DATETIME,
 	locationname varchar(255),

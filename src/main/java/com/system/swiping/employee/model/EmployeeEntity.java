@@ -1,12 +1,16 @@
 package com.system.swiping.employee.model;
 
 import java.sql.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +27,10 @@ public class EmployeeEntity {
 	
 	@Column(name = "currdate")
 	private Date currDate;
+	
+	@OneToMany(mappedBy="empId", cascade = CascadeType.ALL)
+	@JoinColumn(name="empId")
+	private Set<EmployeeTimeTrackingEntity> items;
 
 	public EmployeeEntity() {
 
@@ -61,6 +69,14 @@ public class EmployeeEntity {
 
 	public void setCurrDate(Date currDate) {
 		this.currDate = currDate;
+	}
+	
+	public Set<EmployeeTimeTrackingEntity> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<EmployeeTimeTrackingEntity> items) {
+		this.items = items;
 	}
 
 	@Override
