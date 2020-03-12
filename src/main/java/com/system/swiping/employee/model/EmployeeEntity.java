@@ -28,8 +28,8 @@ public class EmployeeEntity {
 	@Column(name = "currdate")
 	private Date currDate;
 	
-	@OneToMany(mappedBy="employeeEntry", cascade = CascadeType.ALL)
-	private Set<EmployeeTimeTrackingEntity> trackingEntries;
+	@OneToMany(mappedBy="employeeentry", cascade = CascadeType.ALL)
+	private Set<EmployeeTimeTrackingEntity> trackingentries;
 
 	public EmployeeEntity() {
 
@@ -70,12 +70,12 @@ public class EmployeeEntity {
 		this.currDate = currDate;
 	}
 	
-	public Set<EmployeeTimeTrackingEntity> getTrackingEntries() {
-		return trackingEntries;
+	public Set<EmployeeTimeTrackingEntity> getTrackingentries() {
+		return trackingentries;
 	}
 
-	public void setTrackingEntries(Set<EmployeeTimeTrackingEntity> trackingEntries) {
-		this.trackingEntries = trackingEntries;
+	public void setTrackingEntries(Set<EmployeeTimeTrackingEntity> trackingentries) {
+		this.trackingentries = trackingentries;
 	}
 
 	@Override

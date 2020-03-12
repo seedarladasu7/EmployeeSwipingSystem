@@ -21,7 +21,7 @@ public class EmployeeTimeTrackingEntity {
 	@Column(name = "id")
 	private Integer trackingID;
 	
-	@Column(name = "swipenn")
+	@Column(name = "swipein")
 	private Date swipeIn;
 	
 	@Column(name = "swipeout")
@@ -37,8 +37,8 @@ public class EmployeeTimeTrackingEntity {
 	private int empId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trackingEntries")
-	private EmployeeEntity employeeEntry;
+    @JoinColumn(name = "empid", insertable=false, updatable=false)
+	private EmployeeEntity employeeentry;
 	
 
 	public EmployeeTimeTrackingEntity() {
@@ -102,12 +102,12 @@ public class EmployeeTimeTrackingEntity {
 		this.empId = empId;
 	}
 
-	public EmployeeEntity getEmployeeEntry() {
-		return employeeEntry;
+	public EmployeeEntity getEmployeeentry() {
+		return employeeentry;
 	}
 
-	public void setEmployeeEntry(EmployeeEntity employeeEntry) {
-		this.employeeEntry = employeeEntry;
+	public void setEmployeeEntry(EmployeeEntity employeeentry) {
+		this.employeeentry = employeeentry;
 	}
 
 	@Override
