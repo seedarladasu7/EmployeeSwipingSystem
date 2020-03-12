@@ -33,10 +33,12 @@ public class EmployeeTimeTrackingEntity {
 	@Column(name = "swipingtype")
 	private String swipingType;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emp_id", referencedColumnName = "id")
 	@Column(name = "empid")
 	private int empId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trackingEntries")
+	private EmployeeEntity employeeEntry;
 	
 
 	public EmployeeTimeTrackingEntity() {
@@ -98,6 +100,14 @@ public class EmployeeTimeTrackingEntity {
 
 	public void setEmpId(int empId) {
 		this.empId = empId;
+	}
+
+	public EmployeeEntity getEmployeeEntry() {
+		return employeeEntry;
+	}
+
+	public void setEmployeeEntry(EmployeeEntity employeeEntry) {
+		this.employeeEntry = employeeEntry;
 	}
 
 	@Override
