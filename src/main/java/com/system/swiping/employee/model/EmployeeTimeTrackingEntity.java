@@ -1,6 +1,7 @@
 package com.system.swiping.employee.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -38,6 +41,7 @@ public class EmployeeTimeTrackingEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "empid", insertable=false, updatable=false)
+	@JsonBackReference
 	private EmployeeEntity employeeentry;
 	
 

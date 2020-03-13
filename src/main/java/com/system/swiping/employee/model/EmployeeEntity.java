@@ -1,6 +1,7 @@
 package com.system.swiping.employee.model;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,9 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="employee")
@@ -29,7 +31,8 @@ public class EmployeeEntity {
 	private Date currDate;
 	
 	@OneToMany(mappedBy="employeeentry", cascade = CascadeType.ALL)
-	private Set<EmployeeTimeTrackingEntity> trackingentries;
+	@JsonManagedReference
+	private List<EmployeeTimeTrackingEntity> trackingentries;
 
 	public EmployeeEntity() {
 
@@ -70,11 +73,11 @@ public class EmployeeEntity {
 		this.currDate = currDate;
 	}
 	
-	public Set<EmployeeTimeTrackingEntity> getTrackingentries() {
+	public List<EmployeeTimeTrackingEntity> getTrackingentries() {
 		return trackingentries;
 	}
 
-	public void setTrackingEntries(Set<EmployeeTimeTrackingEntity> trackingentries) {
+	public void setTrackingEntries(List<EmployeeTimeTrackingEntity> trackingentries) {
 		this.trackingentries = trackingentries;
 	}
 
