@@ -35,14 +35,17 @@ public class EmployeeSwipingTrackDAO {
 
 	public void saveEmployee(EmpSwipeRequest empRequest, EmployeeTimeTracking timeTracking) {
 
-		List<Employee> emp1 = findEmployeeById(empRequest.getEmpId());
+		List<Employee> empList = findEmployeeById(empRequest.getEmpId());
 		BigInteger employeeId = null ;
-		if (emp1 == null || emp1.isEmpty()) {
+		if (empList == null || empList.isEmpty()) {
 			SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
 			insertActor.withTableName("employee").usingGeneratedKeyColumns("id").usingColumns("empname", "currdate");
 			BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(empRequest);
 			employeeId = (BigInteger) insertActor.executeAndReturnKey(param);
-		} 
+		} else {
+			Employee emp = empList.get(0);
+			employeeId = BigInteger.valueOf(emp.getEmpId());
+		}
 		
 		if(employeeId != null) {
 			timeTracking.setEmpId(employeeId.intValue());

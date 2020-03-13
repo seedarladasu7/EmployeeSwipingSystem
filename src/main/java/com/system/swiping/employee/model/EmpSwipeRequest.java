@@ -2,6 +2,8 @@ package com.system.swiping.employee.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class EmpSwipeRequest {
 
 	private Integer empId;
@@ -10,7 +12,8 @@ public class EmpSwipeRequest {
 	private String swipeOut;
 	private String date;
 	private String locationName;
-	private String swipingType;
+	private String swipingType;	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="IST")
 	private Date currDate;
 	private String searchBy;
 
