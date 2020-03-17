@@ -13,15 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.system.swiping.employee.model.EmpSwipeRequest;
 import com.system.swiping.employee.model.EmpSwipeResponse;
+import com.system.swiping.employee.model.Employee;
 import com.system.swiping.employee.model.EmployeeSwipeTrackResponse;
-import com.system.swiping.employee.service.EmploeeSwipingService;
+import com.system.swiping.employee.service.EmployeeSwipingService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/employees")
 public class EmployeeSwipingController {
 
 	@Autowired
-	private EmploeeSwipingService swipingService;
+	private EmployeeSwipingService swipingService;
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<String> registerEmployee(@RequestBody Employee request) {
+		return new ResponseEntity<>(swipingService.registerEmployeeSwiping(request), HttpStatus.ACCEPTED);
+	}
+	
+	
 
 	@RequestMapping(value = "/registerSwipe", method = RequestMethod.POST)
 	public ResponseEntity<String> registerEmployeeSwiping(@RequestBody EmpSwipeRequest request) {

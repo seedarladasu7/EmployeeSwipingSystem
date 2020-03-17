@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.system.swiping.employee.dao.EmployeeSwipingTrackDAO;
-import com.system.swiping.employee.entity.Employee;
+import com.system.swiping.employee.model.Employee;
 import com.system.swiping.employee.model.EmpSwipeRequest;
 import com.system.swiping.employee.model.EmpSwipeResponse;
 import com.system.swiping.employee.model.EmployeeSwipeTrackResponse;
@@ -26,6 +26,14 @@ public class EmployeeSwipingServiceImpl implements EmployeeSwipingService {
 	private static SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+	
+	@Override
+	public String registerEmployee(com.system.swiping.employee.entity.Employee request) {
+		return null;
+		
+		
+	}
+	
 
 	public String registerEmployeeSwiping(EmpSwipeRequest request) {
 		EmployeeTimeTracking timeTracking = new EmployeeTimeTracking();
@@ -102,5 +110,7 @@ public class EmployeeSwipingServiceImpl implements EmployeeSwipingService {
 
 		return null;
 	}
+
+	
 
 }
