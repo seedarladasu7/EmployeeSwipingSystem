@@ -3,9 +3,12 @@ package com.system.swiping.employee.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.system.swiping.employee.model.EmpSwipeRequest;
@@ -25,15 +28,15 @@ public class EmployeeSwipingController {
 		return new ResponseEntity<>(swipingService.registerEmployeeSwiping(request), HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/viewSwipeDetails", method = RequestMethod.GET)
-	public ResponseEntity<EmpSwipeResponse> getEmpTimeInfo(@RequestBody EmpSwipeRequest request) {
-		return new ResponseEntity<>(swipingService.getEmpTimeTrackingDetails(request), HttpStatus.OK);
+	@RequestMapping(value = "/viewSwipeDetails/{empId}", method = RequestMethod.GET)
+	public ResponseEntity<EmpSwipeResponse> getEmpTimeInfo(@PathVariable("empId") Integer empId) {
+		return new ResponseEntity<>(swipingService.getEmpTimeTrackingDetails(empId), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/viewEmployeeSwipeDetails", method = RequestMethod.GET)
-	public ResponseEntity<EmployeeSwipeTrackResponse> getEmpTimeTrackingInfo(@RequestBody EmpSwipeRequest request)
-			throws Exception {
-		return new ResponseEntity<>(swipingService.getEmployeeSwipeTrackReport(request), HttpStatus.OK);
+	@RequestMapping(value = "/viewSwipeDetails/{empId}/{empName}", method = RequestMethod.GET)
+	public ResponseEntity<EmployeeSwipeTrackResponse> getEmpTimeTrackingInfo(@PathVariable("empId") Integer empId,
+			@PathVariable("empName") String empName, @RequestParam("searchBy") String searchBy) throws Exception {
+		return new ResponseEntity<>(swipingService.getEmployeeSwipeTrackReport(empId, empName, searchBy), HttpStatus.OK);
 	}
 
 }

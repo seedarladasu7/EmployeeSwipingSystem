@@ -54,10 +54,10 @@ public class EmployeeSwipingTrackDAO {
 		insertActor.executeAndReturnKey(param);
 	}
 
-	public EmpSwipeResponse getEmpTimeTrackingInfo(EmpSwipeRequest request) {
+	public EmpSwipeResponse getEmpTimeTrackingInfo(int empId) {
 		EmpSwipeResponse resp = new EmpSwipeResponse();
 
-		List<Employee> empList = findEmployeeById(request.getEmpId());
+		List<Employee> empList = findEmployeeById(empId);
 		if (empList != null && !empList.isEmpty()) {
 			Employee emp = (Employee) empList.get(0);
 			resp.setEmpId(emp.getEmpId());

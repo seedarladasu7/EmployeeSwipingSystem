@@ -15,10 +15,10 @@ import com.system.swiping.employee.model.EmpSwipeRequest;
 import com.system.swiping.employee.model.EmpSwipeResponse;
 import com.system.swiping.employee.model.EmployeeSwipeTrackResponse;
 import com.system.swiping.employee.model.EmployeeTimeTracking;
-import com.system.swiping.employee.service.EmploeeSwipingService;
+import com.system.swiping.employee.service.EmployeeSwipingService;
 
 @Service
-public class EmployeeSwipingServiceImpl implements EmploeeSwipingService {
+public class EmployeeSwipingServiceImpl implements EmployeeSwipingService {
 
 	@Autowired
 	private EmployeeSwipingTrackDAO dao;
@@ -50,21 +50,21 @@ public class EmployeeSwipingServiceImpl implements EmploeeSwipingService {
 	}
 
 	@Override
-	public EmpSwipeResponse getEmpTimeTrackingDetails(EmpSwipeRequest request) {
-		return dao.getEmpTimeTrackingInfo(request);
+	public EmpSwipeResponse getEmpTimeTrackingDetails(int empId) {
+		return dao.getEmpTimeTrackingInfo(empId);
 	}
 
-	public EmployeeSwipeTrackResponse getEmployeeSwipeTrackReport(EmpSwipeRequest request) {
+	public EmployeeSwipeTrackResponse getEmployeeSwipeTrackReport(int empId, String empName, String searchBy) {
 		Employee empEntity = null;
 
 		Date swipeInTime = null;
 		Date swipeOutTime = null;
 
 		try {
-			if (request.getSearchBy().equalsIgnoreCase("ID")) {
-				empEntity = dao.getEmployeeById(request.getEmpId());
-			} else if (request.getSearchBy().equalsIgnoreCase("NAME")) {
-				empEntity = dao.getEmployeeByName(request.getEmpName());
+			if (searchBy.equalsIgnoreCase("ID")) {
+				empEntity = dao.getEmployeeById(empId);
+			} else if (searchBy.equalsIgnoreCase("NAME")) {
+				empEntity = dao.getEmployeeByName(searchBy);
 			}
 
 			EmployeeSwipeTrackResponse response = new EmployeeSwipeTrackResponse();
