@@ -3,10 +3,6 @@ package com.system.swiping.employee.dao;
 import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +11,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.system.swiping.employee.exceptionclasses.RecordInsertionException;
 import com.system.swiping.employee.model.EmpSwipeRequest;
 import com.system.swiping.employee.model.EmpSwipeResponse;
 import com.system.swiping.employee.model.Employee;
 import com.system.swiping.employee.model.EmployeeTimeTracking;
+import com.system.swiping.employee.repository.EmployeeRepository;
 
 @Repository
 public class EmployeeSwipingTrackDAO {
@@ -33,10 +26,13 @@ public class EmployeeSwipingTrackDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
+	EmployeeRepository empRepo;
+
 	public void saveEmployee(EmpSwipeRequest empRequest, EmployeeTimeTracking timeTracking) {
 
 		List<Employee> empList = findEmployeeById(empRequest.getEmpId());
-		BigInteger employeeId = null ;
+		BigInteger employeeId = null;
 		if (empList == null || empList.isEmpty()) {
 			SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
 			insertActor.withTableName("employee").usingGeneratedKeyColumns("id").usingColumns("empname", "currdate");
@@ -46,18 +42,14 @@ public class EmployeeSwipingTrackDAO {
 			Employee emp = empList.get(0);
 			employeeId = BigInteger.valueOf(emp.getEmpId());
 		}
-		
-		if(employeeId != null) {
+
+		if (employeeId != null) {
 			timeTracking.setEmpId(employeeId.intValue());
 		}
-		/*
-		 * else { saveEmployee(empRequest); }
-		 */
-
+		
 		SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);
-		insertActor.withTableName("employeetimetracking")
-					.usingGeneratedKeyColumns("id")
-					.usingColumns("swipein", "swipeout", "locationname", "swipingtype", "empid");
+		insertActor.withTableName("employeetimetracking").usingGeneratedKeyColumns("id").usingColumns("swipein",
+				"swipeout", "locationname", "swipingtype", "empid");
 		BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(timeTracking);
 		insertActor.executeAndReturnKey(param);
 	}
@@ -71,8 +63,8 @@ public class EmployeeSwipingTrackDAO {
 			resp.setEmpId(emp.getEmpId());
 			resp.setEmpName(emp.getEmpName());
 			resp.setCurrDate(emp.getCurrDate());
-		} 
-		
+		}
+
 		return resp;
 	}
 
@@ -92,30 +84,40 @@ public class EmployeeSwipingTrackDAO {
 		}
 	}
 
-	public void saveEmployee(EmpSwipeRequest empRequestd) {
+	public com.system.swiping.employee.entity.Employee getEmployeeById(int empId) throws Exception {
+		return empRepo.findById(new Integer(empId)).orElseThrow(Exception::new);
+	}
 
-		NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbcTemplate);
-		String dateString = empRequestd.getDate();
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public com.system.swiping.employee.entity.Employee getEmployeeByName(String name) throws Exception {
 
-		Date myDate;
-		try {
-			myDate = formatter.parse(dateString);
+		List<com.system.swiping.employee.entity.Employee> empList = empRepo.findByEmpName(name);
 
-			GregorianCalendar calendar = new GregorianCalendar();
-			calendar.setTime(myDate);
-			KeyHolder holder = new GeneratedKeyHolder();
-		
-			SqlParameterSource parameters = new MapSqlParameterSource()
-					.addValue("empId", empRequestd.getEmpId())
-					.addValue("empName", empRequestd.getEmpName())
-					.addValue("currDate", formatter.format(myDate));
-			template.update("INSERT INTO EMPLOYEE (  id, empname, currdate) VALUES (:empId, :empName, :currDate)", parameters,
-					holder);
-			System.out.println(" row inserted.");
-		} catch (Exception e) {
-			throw new RecordInsertionException(e.getMessage());
-		}
+		if (empList != null && !empList.isEmpty())
+			return empList.get(0);
+		return new com.system.swiping.employee.entity.Employee();
 
 	}
-}
+
+	/*
+	 * public void saveEmployee(EmpSwipeRequest empRequestd) {
+	 * 
+	 * NamedParameterJdbcTemplate template = new
+	 * NamedParameterJdbcTemplate(jdbcTemplate); String dateString =
+	 * empRequestd.getDate(); DateFormat formatter = new
+	 * SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 * 
+	 * Date myDate; try { myDate = formatter.parse(dateString);
+	 * 
+	 * GregorianCalendar calendar = new GregorianCalendar();
+	 * calendar.setTime(myDate); KeyHolder holder = new GeneratedKeyHolder();
+	 * 
+	 * SqlParameterSource parameters = new MapSqlParameterSource()
+	 * .addValue("empId", empRequestd.getEmpId()) .addValue("empName",
+	 * empRequestd.getEmpName()) .addValue("currDate", formatter.format(myDate));
+	 * template.
+	 * update("INSERT INTO EMPLOYEE (  id, empname, currdate) VALUES (:empId, :empName, :currDate)"
+	 * , parameters, holder); System.out.println(" row inserted."); } catch
+	 * (Exception e) { throw new RecordInsertionException(e.getMessage()); }
+	 * 
+	 * }
+	 */}

@@ -1,10 +1,9 @@
 package com.system.swiping.employee.model;
 
-public class EmployeeSwipeinSwipeoutResponse {
+public class EmployeeSwipeTrackResponse {
 	
 	private int empId;
 	private String empName;
-	private String currDate;
 	private String swipeInTime;
 	private String swipeOutTiome;
 	
@@ -20,12 +19,6 @@ public class EmployeeSwipeinSwipeoutResponse {
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
-	public String getCurrDate() {
-		return currDate;
-	}
-	public void setCurrDate(String currDate) {
-		this.currDate = currDate;
-	}
 	public String getSwipeInTime() {
 		return swipeInTime;
 	}
@@ -39,6 +32,4 @@ public class EmployeeSwipeinSwipeoutResponse {
 		this.swipeOutTiome = swipeOutTiome;
 	}
 	
-	
-
 }

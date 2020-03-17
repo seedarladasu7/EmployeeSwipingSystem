@@ -8,15 +8,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.system.swiping.employee.model.EmployeeEntity;
+import com.system.swiping.employee.entity.Employee;
 
 
 @Repository
-public interface EmployeeRepository extends CrudRepository<EmployeeEntity, Integer>{
+public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
 	
-	Optional<EmployeeEntity> findById(Integer empId);
-	List<EmployeeEntity> findByEmpName(String empName);
-    List<EmployeeEntity> findByEmpIdAndEmpName(Integer empId, String empName);
+	Optional<Employee> findById(Integer empId);
+	List<Employee> findByEmpName(String empName);
+    List<Employee> findByEmpIdAndEmpName(Integer empId, String empName);
 
 	/*
 	 * @Query("SELECT a FROM EmployeeEntity a WHERE a.title=:title and a.category=:category"
